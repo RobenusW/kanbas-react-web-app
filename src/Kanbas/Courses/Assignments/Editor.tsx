@@ -37,7 +37,7 @@ export default function AssignmentEditor() {
                 <label htmlFor="wd-display-grade-as">Display Grade as</label>
             </td>
             <td>
-                <select name="wd-display-grade-as">
+                <select id="wd-display-grade-as">
                     <option value="Percentage">Percentage</option>
                 </select>
             </td>
@@ -48,7 +48,7 @@ export default function AssignmentEditor() {
                 <label htmlFor="wd-submission-type">Submission Type</label>
             </td>
             <td>
-                <select name="wd-submission-type">
+                <select id="wd-submission-type">
                 <option value="Online">Online</option>
                 </select>
             </td>
