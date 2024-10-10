@@ -7,9 +7,13 @@ export default function ModulesControls() {
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module</button>
       <div className="dropdown d-inline me-1 float-end">
+      <button id="wd-view-progress" className="me-2 btn btn-lg btn-secondary">
+        View Progress </button>
+        <button id="wd-collapse-all" className="me-2 btn btn-lg btn-secondary">
+        Collapse All </button>
         <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle"
           type="button" data-bs-toggle="dropdown">
-          <GreenCheckmark />
+        <GreenCheckmark />
           Publish All</button>
         <ul className="dropdown-menu">
           <li>
@@ -22,11 +26,17 @@ export default function ModulesControls() {
               <GreenCheckmark />
               Publish modules only</a>
           </li>
-          {/* Create two more items with IDs wd-unpublish-all-modules-and-items and
-              wd-unpublish-modules-only with labels Unpublish all modules and items
-              and Unpublish modules only */}
+          <li>
+            <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" href="#">
+              <GreenCheckmark />
+              Unpublish all modules and items</a>
+          </li>
+          <li>
+            <a id="wd-unpublish-modules-only" className="dropdown-item" href="#">
+              <GreenCheckmark />
+              Unpublish modules only</a>
+          </li>
         </ul>
       </div>
-      {/* Implement the View Progress and Collapse All buttons with IDs wd-view-progress and wd-collapse-all */}
     </div>
 );}
