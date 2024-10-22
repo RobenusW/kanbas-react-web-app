@@ -5,9 +5,12 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BsPlus } from 'react-icons/bs';
 import {BsSearch} from 'react-icons/bs'
 import { Link } from "react-router-dom";
-
+import { useParams } from "react-router";
+import * as db from "../../Database/";
 
 export default function Assignments() {
+  const { cid } = useParams();
+  const assignments = db.assignments.filter((assignment) => assignment.course === cid);
     return (
       <div>
       <div >
@@ -20,7 +23,6 @@ export default function Assignments() {
       </div>
       <br/>
       <br/>
-
       <ul id="wd-modules" className="list-group rounded-0">
     <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
       <div style={{clear: "both"}} className="wd-title p-3 ps-2 bg-secondary"> 
@@ -34,7 +36,7 @@ export default function Assignments() {
         <div style={{clear: "both"}} className="wd-lesson list-group-item p-3 ps-1">
         <BsGripVertical style={{float: "left"}} className="me-2 fs-3" />
         <BsListTask/>
-          <Link to="./Editor"><h5 className="m-1 d-inline" style={{right: "right"}}>A1</h5></Link>
+          <Link to={`./${assignments.at(0)?._id || "A1"}/Editor`}><h5 className="m-1 d-inline" style={{right: "right"}}>{assignments.at(0)?.title || "A1"}</h5></Link>
           <div style={{float: "right"}}>
           <GreenCheckmark/>
           <BsThreeDotsVertical/>
@@ -50,7 +52,7 @@ export default function Assignments() {
         <div style={{clear: "both"}} className="wd-lesson list-group-item p-3 ps-1">
         <BsGripVertical style={{float: "left"}} className="me-2 fs-3" />
         <BsListTask/>
-        <Link to="./Editor"><h5 className="m-1 d-inline" style={{right: "right"}}>A2</h5></Link>
+        <Link to={`./${assignments.at(1)?._id || "A2"}/Editor`}><h5 className="m-1 d-inline" style={{right: "right"}}>{assignments.at(1)?.title  || "A2"}</h5></Link>
           <div style={{float: "right"}}>
           <GreenCheckmark/>
           <BsThreeDotsVertical/>
@@ -66,7 +68,7 @@ export default function Assignments() {
         <div style={{clear: "both"}} className="wd-lesson list-group-item p-3 ps-1">
         <BsGripVertical style={{float: "left"}} className="me-2 fs-3" />
         <BsListTask/>
-        <Link to="./Editor"><h5 className="m-1 d-inline" style={{right: "right"}}>A3</h5></Link>
+        <Link to={`./${assignments.at(2)?._id || "A3"}/Editor`}><h5 className="m-1 d-inline" style={{right: "right"}}>{assignments.at(2)?.title || "A3"}</h5></Link>
           <div style={{float: "right"}}>
           <GreenCheckmark/>
           <BsThreeDotsVertical/>
@@ -87,45 +89,3 @@ export default function Assignments() {
 
   
     );}
-
-        
-      {/* // <div id="wd-assignments"> */}
-        {/* <input id="wd-search-assignment"
-               placeholder="Search for Assignments" />
-        <button id="wd-add-assignment-group">+ Group</button>
-        <button id="wd-add-assignment">+ Assignment</button>
-        <h3 id="wd-assignments-title">
-          ASSIGNMENTS 40% of Total <button>+</button>
-        </h3>
-        <ul id="wd-assignment-list">
-          <li className="wd-assignment-list-item">
-            <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/123">
-              A1 - ENV + HTML
-            </a>
-            <br></br>
-            Multiple Modules | <strong>Not availale until</strong> May 6 at 12:00am
-            <br></br>
-            <strong>Due</strong> May 13 at 11:59pm | 100 pts
-          </li>
-          <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/123">
-                A2 - CSS + BOOTSTRAP
-        </a>
-            <br></br>
-            Multiple Modules | <strong>Not available until</strong> May 13 at 12:00am
-            <br></br>
-            <strong>Due</strong> May 20 at 11:59pm | 100 pts
-            </li>
-          <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/123">
-                A3 - JAVASCRIPT + REACT
-        </a>
-          <br></br>
-          Multiple Modules | <strong>Not available until</strong> May 20 at 12:00am
-          <strong>Due</strong> May 28 at 11:59pm | 100 pts
-          </li>
-        </ul>
-      </div> */}  

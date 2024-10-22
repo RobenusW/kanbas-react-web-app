@@ -1,23 +1,23 @@
+import {useParams, Link } from "react-router-dom"
+import { assignments } from "../../Database";
+
 export default function AssignmentEditor() {
+  const { aid } = useParams();
+  const { cid } = useParams();
+
+  const assignment = assignments.find((assignment) => assignment._id === aid);
+
+  const description = `${assignment || aid}` + "\n \nThe assignment is available online \n \nSubmit a link to the landing page of your Web application running on Netlify. \n \nThe landing page should include the following: \n \n•Your full name and section \n•Links to each of the lab assignments\n•Link to the Kanbas application\n•Links to all relevant source code repositories\n \nThe Kanbas application should include a link to navigate back to the landing page."
+
     return (
+      
       <div id="wd-assignments-editor">
-      <p className="breadcrumb-item active" aria-current="page">CS1234</p>
+        
+      <p className="breadcrumb-item active" aria-current="page">{cid}</p>
         <label htmlFor="wd-name">Assignment Name</label>
-        <input className="form-control" id="wd-name" value="A1 - ENV + HTML" /><br /><br />
+        <input className="form-control" id="wd-name" value={assignment?.title} /><br /><br />
         <textarea className="form-control" id="wd-description">
-          The assignment is available online Submit a link to the landing page of you Web application running on Netlify. 
-          The Landing page should include the following: Your full name and section Links to each of the lab assignments
-          Link to the Kanbas application Links to all relevant source code repositories
-          The Kanbas application should include a link to navigate back to the landing page.
-
-          <ul>
-            <li>Your full name</li>
-            <li>links to each assignment</li>
-            <li>links to canvas</li>
-            <li>links to all relevant source code</li>
-          </ul>
-
-          The kanbas application should include a link to navigate back to landing page
+          {description}
         </textarea>
         <br />
         <table>
@@ -27,7 +27,7 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-points">Points</label>
           </td>
           <td>
-            <input className=".col-xl me-1 form-control" type="number" id="wd-points" value={100} />
+            <input className=".col-xl me-1 form-control" type="number" id="wd-points" value={assignment?.points} />
           </td>
         </tr>
         <br/>
@@ -123,7 +123,7 @@ export default function AssignmentEditor() {
         <tr>
             <td></td>
           <td>
-            <input className="form-control" type="date" id="wd-due-date" value="2024-05-13" />
+            <input className="form-control" type="date" id="wd-due-date" value={`${assignment?.["due-date"]}`} />
           </td>
         </tr>
         <br/>
@@ -139,10 +139,10 @@ export default function AssignmentEditor() {
         <tr>
             <td></td>
           <td>
-            <input className="form-control" type="date" id="wd-available-from" value="2024-05-13" />
+            <input className="form-control" type="date" id="wd-available-from" value={`${assignment?.["available-until"]}`} />
           </td>
           <td>
-            <input  className="form-control" type="date" id="wd-available-until" value="2024-05-20" />
+            <input  className="form-control" type="date" id="wd-available-until" value={`${assignment?.["due-date"]}`} />
           </td>
         </tr>
         <br/>
@@ -226,8 +226,14 @@ export default function AssignmentEditor() {
             <td></td>
             <td></td>
             <td>
-            <button className="btn btn-secondary">Cancel</button>
+            <Link to={`/Kanbas/Courses/${cid}/Assignments`}>
+            <button className="btn btn-secondary">
+              Cancel
+              </button>
+            </Link>
+            <Link to={`/Kanbas/Courses/${cid}/Assignments`}>
             <button className="btn btn-danger">Save</button>
+            </Link>
             </td>
             </tr>
         </table>
