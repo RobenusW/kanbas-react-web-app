@@ -27,7 +27,7 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-points">Points</label>
           </td>
           <td>
-            <input className=".col-xl me-1 form-control" type="number" id="wd-points" value={assignment?.points} />
+            <input className=".col-xl me-1 form-control" type="number" id="wd-points" value={assignment?.points || 100} />
           </td>
         </tr>
         <br/>
