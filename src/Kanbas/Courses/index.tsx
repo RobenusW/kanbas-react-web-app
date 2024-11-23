@@ -4,8 +4,9 @@ import { Route, Routes, useParams, useLocation } from "react-router";
 import Home from "./Home";
 import Modules from "./Modules";
 import Assignments from "./Assignments";
-import AssignmentEditor from "./Assignments/Editor";
+import Editor from "./Assignments/Editor";
 import PeopleTable from "./People/Table";
+import AssignmentEditor from "./Assignments/Editor";
 
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
@@ -34,9 +35,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
                 <Route path="Assignments" element={
                 <Assignments />
                 } />
-                <Route path="Assignments/:aid/*" element={
-                  
-                <AssignmentEditor/>
+                <Route path="Assignments/:aid/Editor" element={
+                <AssignmentEditor />
                 } />
                 <Route path="People" element={
                 <PeopleTable />

@@ -1,13 +1,37 @@
 import { BsGripVertical, BsListTask, BsThreeDotsVertical, BsPlus, BsSearch } from 'react-icons/bs';
+import { deleteAssignment } from './reducer';
 import GreenCheckmark from '../Modules/GreenCheckmark';
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as coursesClient from "../client"
+import { setAssignments} from "./reducer"
+import { useEffect } from "react";
+import { FaTrash } from "react-icons/fa";
+import * as assignmentClient from "./client";
+
+
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = useSelector( (state: any) => state.assignmentReducer.assignments);
+  const { aid } = useParams();
 
-  
+
+  const assignments = useSelector( (state: any) => state.assignmentReducer.assignments);
+  const dispatch = useDispatch();
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const removeAssignments = async (assignmnetId: string) => {
+    await assignmentClient.deleteAssignment(assignmnetId);
+    dispatch(deleteAssignment(assignmnetId));
+  };
+
   return (
     <div>
       <div>
@@ -16,7 +40,7 @@ export default function Assignments() {
         </span>
         <input className="d-inline form-control me-sm w-25" type="text" placeholder="Search..." aria-label="Search" />
         <button className="d-inline float-end btn ms-2 btn-secondary">+ Group</button>
-        <Link to={`./${cid}/Assignments/Editor`}>
+        <Link to={`./${aid}/Editor`}>
           <button className="d-inline float-end btn btn-danger">+ Assignment</button>
         </Link>
       </div>
@@ -43,6 +67,9 @@ export default function Assignments() {
               <Link to={`./${assignment._id}/Editor`}>
                 <h5 className="m-1 d-inline">{assignment.title || "A1"}</h5>
               </Link>
+
+              <FaTrash onClick={() => removeAssignments(assignment._id)} className="text-danger float-end me-2 mb-1" />
+              
               <div style={{ float: "right" }}>
                 <GreenCheckmark />
                 <BsThreeDotsVertical />
@@ -51,11 +78,11 @@ export default function Assignments() {
               <small className="text-danger ms-4">Multiple Modules</small>
               <small> |</small>
               <small className="ms-1">
-                <strong>Not available until</strong> May 6 at 12:00am |
+                <strong>Not available until</strong> {assignment.availableUntil} |
               </small>
               <br />
               <small className="ms-4">
-                <strong>Due</strong> May 13 at 11:59pm | {assignment.points || 100} pts
+                <strong>Due</strong> {assignment.dueDate} | {assignment.points || 100} pts
               </small>
             </div>
           ))}

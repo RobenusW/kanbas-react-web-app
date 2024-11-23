@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import { useSelector } from "react-redux";
+import AssignmentEditor from "../Courses/Assignments/Editor";
 export default function Account() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   return (
@@ -19,6 +20,7 @@ export default function Account() {
       <Route path="/Signin" element={<Signin />} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/Profile" element={<Profile />} />
+      <Route path="/Editor" element={<AssignmentEditor />} />
     </Routes>
 
           </td>
