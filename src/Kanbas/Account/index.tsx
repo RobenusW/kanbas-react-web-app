@@ -5,6 +5,8 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import { useSelector } from "react-redux";
 import AssignmentEditor from "../Courses/Assignments/Editor";
+import Users from "./Users";
+
 export default function Account() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   return (
@@ -15,16 +17,29 @@ export default function Account() {
             <AccountNavigation />
           </td>
           <td valign="top">
-          <Routes>
-      <Route path="/" element={<Navigate to={ currentUser ? "/Kanbas/Account/Profile" : "/Kanbas/Account/Signin" }/>}/>
-      <Route path="/Signin" element={<Signin />} />
-      <Route path="/Signup" element={<Signup />} />
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/Editor" element={<AssignmentEditor />} />
-    </Routes>
-
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Navigate
+                    to={
+                      currentUser
+                        ? "/Kanbas/Account/Profile"
+                        : "/Kanbas/Account/Signin"
+                    }
+                  />
+                }
+              />
+              <Route path="/Signin" element={<Signin />} />
+              <Route path="/Signup" element={<Signup />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/Editor" element={<AssignmentEditor />} />
+              <Route path="/Users" element={<Users />} />
+              <Route path="/Users/:uid" element={<Users />} />
+            </Routes>
           </td>
         </tr>
       </table>
     </div>
-);}
+  );
+}
