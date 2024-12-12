@@ -3,6 +3,7 @@ import PeopleDetails from "./Details";
 import { Link } from "react-router-dom";
 
 export default function PeopleTable({ users = [] }: { users?: any[] }) {
+  console.log("here");
   return (
     <div id="wd-people-table">
       <PeopleDetails />

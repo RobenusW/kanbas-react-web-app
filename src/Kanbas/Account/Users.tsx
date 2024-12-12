@@ -10,6 +10,7 @@ export default function Users() {
   const [name, setName] = useState("");
 
   const createUser = async () => {
+    console.log("Creating new user");
     const user = await client.createUser({
       firstName: "New",
       lastName: `User${users.length + 1}`,
@@ -19,6 +20,7 @@ export default function Users() {
       section: "S101",
       role: "STUDENT",
     });
+    console.log("User created", user);
     setUsers([...users, user]);
   };
 
@@ -50,6 +52,7 @@ export default function Users() {
   useEffect(() => {
     fetchUsers();
   }, [uid]);
+
   return (
     <div>
       <button
@@ -60,6 +63,7 @@ export default function Users() {
         Users
       </button>
       <h3>Users</h3>
+
       <input
         onChange={(e) => filterUsersByName(e.target.value)}
         placeholder="Search people"

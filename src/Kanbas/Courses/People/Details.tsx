@@ -27,6 +27,7 @@ export default function PeopleDetails() {
   const fetchUser = async () => {
     if (!uid) return;
     const user = await client.findUserById(uid);
+    console.log(user, "user");
     setUser(user);
   };
   useEffect(() => {
